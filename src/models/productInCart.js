@@ -5,57 +5,52 @@ module.exports = (sequelize, DataTypes) => {
 
 class productInCart extends Sequelize.Model {
   static init(sequelize, DataTypes) {
-  return super.init({
-    id: {
-      autoIncrement: true,
-      autoIncrementIdentity: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    cart_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'cart',
-        key: 'id'
-      }
-    },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    type: {
-      type: DataTypes.ENUM("purchased","not_purchased"),
-      allowNull: true,
-      defaultValue: "not_purchased"
-    },
-    product_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'products',
-        key: 'id'
-      }
-    }
-  }, {
-    sequelize,
-    tableName: 'productInCart',
-    schema: 'public',
-    timestamps: false,
-    indexes: [
-      {
-        name: "productInCart_pkey",
-        unique: true,
-        fields: [
-          { name: "id" },
-        ]
+    return super.init({
+      id: {
+        autoIncrement: true,
+        autoIncrementIdentity: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
       },
-    ]
-  });
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      cart_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'cart',
+          key: 'id'
+        }
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      product_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'products',
+          key: 'id'
+        }
+      }
+    }, {
+      sequelize,
+      tableName: 'productInCart',
+      schema: 'public',
+      timestamps: false,
+      indexes: [
+        {
+          name: "productInCart_pkey",
+          unique: true,
+          fields: [
+            { name: "id" },
+          ]
+        },
+      ]
+    });
   }
 }

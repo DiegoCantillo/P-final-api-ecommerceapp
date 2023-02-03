@@ -1,4 +1,4 @@
-const AuthServices = require('../services/auth.services');
+const AuthServices = require('../services/authUsers.services');
 const transporter = require('../utils/mailer');
 
 const register = async (req, res) => {
@@ -6,12 +6,15 @@ const register = async (req, res) => {
         const user = req.body;
         const result = await AuthServices.register(user)
         if (result) {
-            res.status(201).json({ message: 'user created' });
+            const user_id = result.id;
+            const userCart = { user_id }
+            const cart = await AuthServices.createCart(userCart);
+            res.status(201).json({ message: 'user created', cart });
             await transporter.sendMail({
                 to: result.email,
                 from: "diegocantymez@gmail.com",
                 subject: "email confirmation",
-                html: "<h1>Bienvenido a la mejor app de chat creada por Diego Cantillo</h1> <p>Tienes que confirmar tu email</p><p> Solo haz click en el siguiente <a href='#'' target='new_blanc'> enlace </a>",
+                html: "<h1>!Registro exitoso!</h1> <p>Bienvenido a tu tienda virtual<p/> <a href='#'' target='new_blanc'> enlace </a>",
             })
         } else {
             res.status(400).json({ message: 'somethign wrong' })

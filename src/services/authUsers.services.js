@@ -14,6 +14,25 @@ class AuthServices {
             throw error
         }
     }
+
+    static async createCart(userCart) {
+        try {
+            const result = await models.cart.create(userCart)
+            return result
+        } catch (error) {
+            throw error
+        }
+    }
+
+    static async getById(id) {
+        try {
+            const result = users.findByPk(id);
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     static async login(credentials) {
         try {
             const { email, password } = credentials;
