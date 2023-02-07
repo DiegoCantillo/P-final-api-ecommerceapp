@@ -13,9 +13,9 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('tiny'));
 
-db.sync({ force: false })
-    .then(() => console.log("Base de datos sincronizada"))
-    .catch((error) => console.log(error));
+// db.sync({ force: false })
+//     .then(() => console.log("Base de datos sincronizada"))
+//     .catch((error) => console.log(error));
 
 app.get('/', (req, res) => {
     res.json({ message: "wecome to me server" });
